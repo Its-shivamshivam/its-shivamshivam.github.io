@@ -1039,13 +1039,9 @@
     Sometimes this creates distance between you and other people —
     not because you think you are superior,
     but because your way of processing reality becomes different.
-  
     You may see multiple sides of an argument while others only see one.
- 
     You may try to understand before judging while others react instantly.
-
     You may search for truth while others search for validation.
- 
     And slowly, you begin to feel disconnected.
   </p>
 
@@ -1060,9 +1056,6 @@
     fake kindness,
     social masks,
     and hidden motives.
-  </p>
-
-  <p>
     Things that once looked simple no longer feel simple.
     Even happiness becomes complicated sometimes.
     Because awareness increases sensitivity.
@@ -1075,20 +1068,15 @@
     but because of convenience. Many people fear intelligence not because intelligence is harmful,
     but because it challenges their comfort, and yet despite all this,
     rational thinking should not turn into arrogance.
-
     That is where many intellectually aware people fail.
     Understanding more does not make someone more valuable as a human being.
     It simply means they carry a different perspective.
-  </p>
-
-  <p>
     Every person is shaped by different experiences,
     environments,
     fears,
     and limitations.
     Narrow-minded people are not always evil.
     Many are simply products of limited exposure and inherited thinking.
- 
     The real challenge is learning how to stay thoughtful
     without becoming emotionally cold.
   </p>
@@ -1118,22 +1106,34 @@
 
         <!-- INTERACTION -->
 
-        <div class="interaction">
+<div class="interaction">
 
-          <button class="like-btn">
+  <button
+    class="like-btn"
+    onclick="toggleLike(this)"
+  >
 
-            <i class="fa-regular fa-heart"></i>
+    ❤️ Like (
+    <span class="like-count">0</span>
+    )
 
-            Like
+  </button>
 
-          </button>
+  <textarea
+    class="comment-box"
+    placeholder="Leave a comment..."
+  ></textarea>
 
-          <textarea
-            class="comment-box"
-            placeholder="Leave a comment..."
-          ></textarea>
+  <button
+    class="post-btn"
+    onclick="addComment(this)"
+  >
+    Post Comment
+  </button>
 
-        </div>
+  <div class="comments-list"></div>
+
+</div>
 
       </article>
 
