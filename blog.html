@@ -735,22 +735,34 @@
 
         <!-- INTERACTION -->
 
-        <div class="interaction">
+<div class="interaction">
 
-          <button class="like-btn">
+  <button
+    class="like-btn"
+    onclick="toggleLike(this)"
+  >
 
-            <i class="fa-regular fa-heart"></i>
+    ❤️ Like (
+    <span class="like-count">0</span>
+    )
 
-            Like
+  </button>
 
-          </button>
+  <textarea
+    class="comment-box"
+    placeholder="Leave a comment..."
+  ></textarea>
 
-          <textarea
-            class="comment-box"
-            placeholder="Leave a comment..."
-          ></textarea>
+  <button
+    class="post-btn"
+    onclick="addComment(this)"
+  >
+    Post Comment
+  </button>
 
-        </div>
+  <div class="comments-list"></div>
+
+</div>
 
       </article>
 
