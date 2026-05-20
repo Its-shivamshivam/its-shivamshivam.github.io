@@ -48,7 +48,221 @@
       }
 
     };
+// =========================
+// BLOG STORAGE
+// =========================
 
+loadAllInteractions();
+
+// =========================
+// LIKE SYSTEM
+// =========================
+
+function toggleLike(button){
+
+  const card =
+  button.closest('.blog-card');
+
+  const blogTitle =
+  card.querySelector('h2').innerText;
+
+  const countElement =
+  button.querySelector('.like-count');
+
+  let count =
+  parseInt(countElement.innerText);
+
+  if(button.classList.contains('liked')){
+
+    count--;
+
+    button.classList.remove('liked');
+
+  } else {
+
+    count++;
+
+    button.classList.add('liked');
+
+  }
+
+  countElement.innerText = count;
+
+  localStorage.setItem(
+    blogTitle + '_likes',
+    count
+  );
+}
+
+// =========================
+// COMMENT SYSTEM
+// =========================
+
+function addComment(button){
+
+  const interaction =
+  button.parentElement;
+
+  const card =
+  button.closest('.blog-card');
+
+  const blogTitle =
+  card.querySelector('h2').innerText;
+
+  const textarea =
+  interaction.querySelector('.comment-box');
+
+  const commentsList =
+  interaction.querySelector('.comments-list');
+
+  const commentText =
+  textarea.value.trim();
+
+  if(commentText === ''){
+
+    alert('Please write a comment.');
+
+    return;
+  }
+
+  createComment(
+    commentsList,
+    commentText,
+    blogTitle
+  );
+
+  saveComments(blogTitle);
+
+  textarea.value = '';
+}
+
+// =========================
+// CREATE COMMENT
+// =========================
+
+function createComment(
+  commentsList,
+  commentText,
+  blogTitle
+){
+
+  const commentItem =
+  document.createElement('div');
+
+  commentItem.className =
+  'comment-item';
+
+  commentItem.innerHTML = `
+
+    <div class="comment-text">
+      ${commentText}
+    </div>
+
+    <button
+      class="delete-btn"
+      onclick="deleteComment(this, '${blogTitle}')"
+    >
+      Delete
+    </button>
+
+  `;
+
+  commentsList.prepend(commentItem);
+}
+
+// =========================
+// DELETE COMMENT
+// =========================
+
+function deleteComment(button, blogTitle){
+
+  const comment =
+  button.parentElement;
+
+  const commentsList =
+  comment.parentElement;
+
+  comment.remove();
+
+  saveComments(blogTitle);
+}
+
+// =========================
+// SAVE COMMENTS
+// =========================
+
+function saveComments(blogTitle){
+
+  const card =
+  [...document.querySelectorAll('.blog-card')]
+  .find(card =>
+    card.querySelector('h2').innerText
+    === blogTitle
+  );
+
+  const comments = [];
+
+  card.querySelectorAll('.comment-text')
+  .forEach(comment => {
+
+    comments.push(comment.innerText);
+
+  });
+
+  localStorage.setItem(
+    blogTitle + '_comments',
+    JSON.stringify(comments)
+  );
+}
+
+// =========================
+// LOAD SAVED DATA
+// =========================
+
+function loadAllInteractions(){
+
+  window.addEventListener('DOMContentLoaded', () => {
+
+    document
+    .querySelectorAll('.blog-card')
+    .forEach(card => {
+
+      const blogTitle =
+      card.querySelector('h2').innerText;
+
+      const likeCount =
+      localStorage.getItem(
+        blogTitle + '_likes'
+      ) || 0;
+
+      card.querySelector('.like-count')
+      .innerText = likeCount;
+
+      const comments =
+      JSON.parse(
+        localStorage.getItem(
+          blogTitle + '_comments'
+        )
+      ) || [];
+
+      const commentsList =
+      card.querySelector('.comments-list');
+
+      comments.forEach(comment => {
+
+        createComment(
+          commentsList,
+          comment,
+          blogTitle
+        );
+
+      });
+
+    });
+
+  });
+
+}
   </script>
 
   <script
@@ -733,25 +947,116 @@
 
         </div>
 
-        <!-- INTERACTION -->
+<!-- INTERACTION -->
 
-        <div class="interaction">
+<div class="interaction">
 
-          <button class="like-btn">
+  <button
+    class="like-btn"
+    onclick="toggleLike(this)"
+  >
 
-            <i class="fa-regular fa-heart"></i>
+    ❤️ Like (
+    <span class="like-count">0</span>
+    )
 
-            Like
+  </button>
 
-          </button>
+  <textarea
+    class="comment-box"
+    placeholder="Leave a comment..."
+  ></textarea>
 
-          <textarea
-            class="comment-box"
-            placeholder="Leave a comment..."
-          ></textarea>
+  <button
+    class="post-btn"
+    onclick="addComment(this)"
+  >
+    Post Comment
+  </button>
 
-        </div>
+  <div class="comments-list"></div>
 
+</div>
+.post-btn{
+
+  width: fit-content;
+
+  padding: 12px 20px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  background: #12385a;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.35s ease;
+}
+
+.post-btn:hover{
+
+  transform: translateY(-3px);
+}
+
+.comments-list{
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-top: 10px;
+}
+
+.comment-item{
+
+  padding: 16px;
+
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.08);
+
+  border: 1px solid rgba(0,0,0,0.08);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 14px;
+}
+
+.comment-text{
+
+  flex: 1;
+
+  line-height: 1.8;
+}
+
+.delete-btn{
+
+  border: none;
+
+  background: #c0392b;
+
+  color: white;
+
+  padding: 8px 14px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.delete-btn:hover{
+
+  opacity: 0.85;
+}
       </article>
 
       <!-- BLOG 2 -->
