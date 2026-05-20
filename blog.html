@@ -733,116 +733,25 @@
 
         </div>
 
-<!-- INTERACTION -->
+        <!-- INTERACTION -->
 
-<div class="interaction">
+        <div class="interaction">
 
-  <button
-    class="like-btn"
-    onclick="toggleLike(this)"
-  >
+          <button class="like-btn">
 
-    ❤️ Like (
-    <span class="like-count">0</span>
-    )
+            <i class="fa-regular fa-heart"></i>
 
-  </button>
+            Like
 
-  <textarea
-    class="comment-box"
-    placeholder="Leave a comment..."
-  ></textarea>
+          </button>
 
-  <button
-    class="post-btn"
-    onclick="addComment(this)"
-  >
-    Post Comment
-  </button>
+          <textarea
+            class="comment-box"
+            placeholder="Leave a comment..."
+          ></textarea>
 
-  <div class="comments-list"></div>
+        </div>
 
-</div>
-.post-btn{
-
-  width: fit-content;
-
-  padding: 12px 20px;
-
-  border-radius: 12px;
-
-  border: none;
-
-  background: #12385a;
-
-  color: white;
-
-  cursor: pointer;
-
-  transition: 0.35s ease;
-}
-
-.post-btn:hover{
-
-  transform: translateY(-3px);
-}
-
-.comments-list{
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
-
-  margin-top: 10px;
-}
-
-.comment-item{
-
-  padding: 16px;
-
-  border-radius: 18px;
-
-  background: rgba(255,255,255,0.08);
-
-  border: 1px solid rgba(0,0,0,0.08);
-
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: flex-start;
-
-  gap: 14px;
-}
-
-.comment-text{
-
-  flex: 1;
-
-  line-height: 1.8;
-}
-
-.delete-btn{
-
-  border: none;
-
-  background: #c0392b;
-
-  color: white;
-
-  padding: 8px 14px;
-
-  border-radius: 10px;
-
-  cursor: pointer;
-}
-
-.delete-btn:hover{
-
-  opacity: 0.85;
-}
       </article>
 
       <!-- BLOG 2 -->
